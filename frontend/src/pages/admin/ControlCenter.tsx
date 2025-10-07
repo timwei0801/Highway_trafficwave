@@ -443,7 +443,6 @@ const ControlCenter: React.FC<ControlCenterProps> = () => {
                     
                     <div className="flex justify-between items-center text-xs text-gray-500">
                       <span>預期效果: {action.expectedImpact}</span>
-                      <span>信心度: {action.confidence ? (action.confidence * 100).toFixed(0) : '0'}%</span>
                     </div>
                     
                     <button
@@ -510,6 +509,9 @@ const ControlCenter: React.FC<ControlCenterProps> = () => {
         isOpen={chatbotOpen}
         onClose={() => setChatbotOpen(false)}
         position="fixed"
+        trafficData={trafficData}
+        shockwaves={shockwaves}
+        predictions={predictions}
       />
     </div>
   );
