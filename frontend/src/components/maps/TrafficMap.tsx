@@ -491,35 +491,12 @@ const TrafficMap: React.FC<TrafficMapProps> = ({
 
   // 根據衝擊波嚴重程度獲取樣式
   const getShockwaveStyle = (shockwave: ShockwaveData) => {
-    const severity = shockwave.severity || determineSeverityFromIntensity(shockwave.intensity);
-    
-    switch (severity) {
-      case 'critical':
-        return {
-          color: '#DC2626', // 深紅色
-          opacity: 0.9,
-          strokeWeight: 4
-        };
-      case 'high':
-        return {
-          color: '#EF4444', // 紅色
-          opacity: 0.8,
-          strokeWeight: 3
-        };
-      case 'medium':
-        return {
-          color: '#F59E0B', // 橙色
-          opacity: 0.7,
-          strokeWeight: 2
-        };
-      case 'low':
-      default:
-        return {
-          color: '#10B981', // 綠色
-          opacity: 0.6,
-          strokeWeight: 2
-        };
-    }
+    // 統一使用紅色，不再根據嚴重程度區分
+    return {
+      color: '#DC2626', // 統一紅色
+      opacity: 0.8,
+      strokeWeight: 3
+    };
   };
 
   // 根據強度判斷嚴重程度
@@ -1056,11 +1033,11 @@ const TrafficMap: React.FC<TrafficMapProps> = ({
               </div>
               <div className="flex items-center mb-1">
                 <div className="w-3 h-3 rounded-full bg-red-500 mr-2 opacity-80"></div>
-                <span>高危險</span>
+                <span>壅塞</span>
               </div>
               <div className="flex items-center">
                 <div className="w-3 h-3 rounded-full bg-red-700 mr-2 opacity-90"></div>
-                <span>極危險</span>
+                <span>極壅塞</span>
               </div>
             </div>
 

@@ -62,6 +62,12 @@ const MTSTNetPredictor: React.FC = () => {
   const [autoRefresh, setAutoRefresh] = useState(false);
   const [selectedView, setSelectedView] = useState<'predictions' | 'status'>('predictions');
 
+  // 篩選狀態
+  const [filterHighway, setFilterHighway] = useState<string>('all');
+  const [filterDirection, setFilterDirection] = useState<string>('all');
+  const [searchStation, setSearchStation] = useState<string>('');
+  const [sortBy, setSortBy] = useState<'default' | 'speed_asc' | 'speed_desc' | 'flow_asc' | 'flow_desc'>('default');
+
   // 取得預測資料
   const fetchPredictions = async () => {
     try {
@@ -150,6 +156,67 @@ const MTSTNetPredictor: React.FC = () => {
       default: return 'text-red-600 bg-red-50';
     }
   };
+
+  // 從 station_id 提取高速公路編號（處理 01F, 03F 格式）
+  const extractHighwayFromStationId = (stationId: string): string => {
+    if (stationId.startsWith('01F')) return '1';
+    if (stationId.startsWith('03F')) return '3';
+    return '';
+  };
+
+  // 篩選預測資料
+  const filteredAndSortedPredictions = (() => {
+    // 先篩選
+    let filtered = predictions?.predictions.filter(pred => {
+      // 從 station_id 提取高速公路編號
+      const highway = pred.highway || extractHighwayFromStationId(pred.station_id);
+
+      // 高速公路篩選
+      if (filterHighway !== 'all' && highway !== filterHighway) {
+        return false;
+      }
+      // 方向篩選
+      if (filterDirection !== 'all' && pred.direction !== filterDirection) {
+        return false;
+      }
+      // 站點名稱搜尋
+      if (searchStation && !pred.location_name.toLowerCase().includes(searchStation.toLowerCase()) && !pred.station_id.includes(searchStation)) {
+        return false;
+      }
+      return true;
+    }) || [];
+
+    // 再排序
+    if (sortBy !== 'default') {
+      filtered = [...filtered].sort((a, b) => {
+        switch (sortBy) {
+          case 'speed_asc':
+            return a.predicted_speed - b.predicted_speed;
+          case 'speed_desc':
+            return b.predicted_speed - a.predicted_speed;
+          case 'flow_asc':
+            return a.predicted_flow - b.predicted_flow;
+          case 'flow_desc':
+            return b.predicted_flow - a.predicted_flow;
+          default:
+            return 0;
+        }
+      });
+    }
+
+    return filtered;
+  })();
+
+  // 取得所有高速公路選項（包含從 station_id 提取的）
+  const highwayOptions = Array.from(new Set(
+    predictions?.predictions.map(p => {
+      const highway = p.highway || extractHighwayFromStationId(p.station_id);
+      return highway;
+    }).filter(Boolean)
+  )).sort() || [];
+
+  // 取得所有方向選項
+  const directionOptions = Array.from(new Set(predictions?.predictions.map(p => p.direction).filter(Boolean))) || [];
 
   return (
     <div className="bg-white rounded-xl shadow-lg border border-gray-200">
@@ -248,7 +315,7 @@ const MTSTNetPredictor: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-green-600 text-sm font-medium">預測時間範圍</p>
-                      <p className="text-2xl font-bold text-green-900">{predictions.time_horizon}分</p>
+                      <p className="text-2xl font-bold text-green-900">5分</p>
                     </div>
                     <ClockIcon className="w-8 h-8 text-green-500" />
                   </div>
@@ -276,6 +343,77 @@ const MTSTNetPredictor: React.FC = () => {
               </div>
             )}
 
+            {/* 篩選控制列 */}
+            {predictions?.predictions && (
+              <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+                <h3 className="text-sm font-semibold text-gray-700 mb-3">篩選與排序</h3>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {/* 高速公路篩選 */}
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">高速公路</label>
+                    <select
+                      value={filterHighway}
+                      onChange={(e) => setFilterHighway(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                      <option value="all">全部</option>
+                      {highwayOptions.map(highway => (
+                        <option key={highway} value={highway}>國道{highway}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* 方向篩選 */}
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">方向</label>
+                    <select
+                      value={filterDirection}
+                      onChange={(e) => setFilterDirection(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                      <option value="all">全部</option>
+                      {directionOptions.map(direction => (
+                        <option key={direction} value={direction}>
+                          {direction === 'N' ? '北向' : direction === 'S' ? '南向' : direction}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* 站點搜尋 */}
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">搜尋站點</label>
+                    <input
+                      type="text"
+                      value={searchStation}
+                      onChange={(e) => setSearchStation(e.target.value)}
+                      placeholder="輸入站點名稱或ID..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+
+                  {/* 排序方式 */}
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">排序方式</label>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value as any)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    >
+                      <option value="default">預設順序</option>
+                      <option value="speed_desc">速度：高→低</option>
+                      <option value="speed_asc">速度：低→高</option>
+                      <option value="flow_desc">流量：高→低</option>
+                      <option value="flow_asc">流量：低→高</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="text-xs text-gray-600">
+                  顯示 {filteredAndSortedPredictions.length} / {predictions.total_stations} 個站點
+                </div>
+              </div>
+            )}
+
             {/* 預測結果列表 */}
             {loading ? (
               <div className="text-center py-12">
@@ -287,9 +425,11 @@ const MTSTNetPredictor: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
                   預測結果 ({formatTime(predictions.generated_at)})
                 </h3>
-                
-                <div className="grid gap-4">
-                  {predictions.predictions.slice(0, 10).map((pred, index) => (
+
+                {/* 滾動容器 */}
+                <div className="max-h-[600px] overflow-y-auto pr-2 space-y-4">
+                  {filteredAndSortedPredictions.length > 0 ? (
+                    filteredAndSortedPredictions.map((pred) => (
                     <div key={pred.station_id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
@@ -326,16 +466,14 @@ const MTSTNetPredictor: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                    ))
+                  ) : (
+                    <div className="text-center py-12">
+                      <ExclamationTriangleIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <p className="text-gray-600">沒有符合篩選條件的站點</p>
+                    </div>
+                  )}
                 </div>
-
-                {predictions.predictions.length > 10 && (
-                  <div className="text-center py-4">
-                    <p className="text-gray-600">
-                      顯示前 10 個站點，共 {predictions.predictions.length} 個預測結果
-                    </p>
-                  </div>
-                )}
               </div>
             ) : (
               <div className="text-center py-12">

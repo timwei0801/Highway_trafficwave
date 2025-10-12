@@ -59,8 +59,8 @@ const DriverDashboard: React.FC = () => {
   } = useDirections();
 
   // 交通資料 Hooks
-  const { trafficData, loading: trafficLoading, error: trafficError } = useTrafficData();
-  const { shockwaves, predictions, alerts, loading: shockwaveLoading, error: shockwaveError } = useShockwaveData(userLocation || undefined);
+  const { trafficData, loading: trafficLoading, error: trafficError, refreshData: refreshTrafficData } = useTrafficData();
+  const { shockwaves, predictions, alerts, loading: shockwaveLoading, error: shockwaveError, refreshData: refreshShockwaveData } = useShockwaveData(userLocation || undefined);
 
   // 當選中的衝擊波改變時，滾動列表到該項目
   useEffect(() => {
@@ -98,6 +98,19 @@ const DriverDashboard: React.FC = () => {
       }
     }, 3000);
   }, [getCurrentLocation]);
+
+  // 重新整理地圖和衝擊波資料
+  const refreshMapData = async () => {
+    try {
+      await Promise.all([
+        refreshTrafficData(),
+        refreshShockwaveData()
+      ]);
+      console.log('✅ 地圖和衝擊波資料已重新整理');
+    } catch (error) {
+      console.error('❌ 重新整理資料失敗:', error);
+    }
+  };
 
   // 檢查 Ollama AI 狀態
   const checkRAGStatus = async () => {
@@ -789,10 +802,6 @@ const DriverDashboard: React.FC = () => {
                         <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                         <span className="text-xs">阻塞</span>
                       </div>
-                      <div className="flex items-center space-x-1">
-                        <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
-                        <span className="text-xs">衝擊波</span>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -825,8 +834,9 @@ const DriverDashboard: React.FC = () => {
                   </button>
                   
                   <button
+                    onClick={refreshMapData}
                     className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg hover:bg-white transition-colors"
-                    title="重新整理地圖"
+                    title="重新整理地圖和衝擊波資料"
                   >
                     <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

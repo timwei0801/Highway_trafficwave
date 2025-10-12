@@ -605,7 +605,7 @@ class MTSTNetRealtimePredictor:
                     'predicted_flow': round(predicted_flow, 1),
                     'predicted_speed': round(predicted_speed, 1),
                     'confidence': round(confidence, 3),
-                    'time_horizon': self.model_params['output_length'] * 5,  # 分鐘
+                    'time_horizon': 5,  # 固定5分鐘
                     'timestamp': current_time.isoformat(),
                     'highway': station_info.get('highway', ''),
                     'direction': station_info.get('direction', '')
@@ -618,7 +618,7 @@ class MTSTNetRealtimePredictor:
                 'predictions': prediction_results,
                 'model_version': 'MT-STNet-v1.0',
                 'prediction_time': current_time.isoformat(),
-                'time_horizon_minutes': self.model_params['output_length'] * 5,
+                'time_horizon_minutes': 5,  # 固定5分鐘
                 'total_stations': len(prediction_results),
                 'data_source': 'REALTIME'
             }
