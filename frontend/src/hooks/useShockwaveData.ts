@@ -4,7 +4,10 @@ import { useState, useEffect, useCallback } from 'react';
 
 interface ShockwaveData {
   id: string;
+  station_id?: string;  // 測站編號
+  station_name?: string;  // 測站名稱
   location: string;
+  location_name?: string;  // 位置名稱（交流道資訊）
   lat: number;
   lng: number;
   intensity: number;
@@ -95,7 +98,10 @@ export const useShockwaveData = (userLocation?: { lat: number; lng: number }): S
       if (shockwaveData.shockwaves && Array.isArray(shockwaveData.shockwaves)) {
         formattedShockwaves = shockwaveData.shockwaves.map((sw: any) => ({
           id: sw.id,
+          station_id: sw.station_id,  // 測站編號
+          station_name: sw.location_name,  // 測站名稱（交流道資訊）
           location: sw.location_name,
+          location_name: sw.location_name,
           lat: sw.latitude,
           lng: sw.longitude,
           intensity: sw.intensity,
@@ -123,7 +129,10 @@ export const useShockwaveData = (userLocation?: { lat: number; lng: number }): S
         formattedShockwaves = [
           {
             id: 'mock-sw-001',
+            station_id: '01F0339S',
+            station_name: '桃園 - 內壢',
             location: '國道1號桃園段',
+            location_name: '桃園 - 內壢',
             lat: 25.0330,
             lng: 121.5654,
             intensity: 6.5,
@@ -213,7 +222,10 @@ export const useShockwaveData = (userLocation?: { lat: number; lng: number }): S
       const mockShockwaves = [
         {
           id: 'mock-sw-fallback',
+          station_id: '01F0339S',
+          station_name: '模擬測站',
           location: '國道1號模擬段',
+          location_name: '模擬測站',
           lat: 25.0330,
           lng: 121.5654,
           intensity: 5.5,
