@@ -2121,7 +2121,7 @@ This research and system development would not have been possible without the co
 - **Documentation**: [Wiki](https://github.com/timwei0801/Highway_trafficwave/wiki)
 
 ### Maintainer
-- **Name**: Tim Wei
+- **Name**: Tim Wei 
 - **GitHub**: [@timwei0801](https://github.com/timwei0801)
 - **Email**: [Available on GitHub profile]
 
