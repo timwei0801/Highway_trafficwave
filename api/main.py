@@ -66,20 +66,41 @@ async def _background_init():
     try:
         data_dir = os.path.join(root_dir, "data")
 
-        print("📡 背景初始化資料收集系統...")
-        data_collector = OptimizedIntegratedDataCollectionSystem(base_dir=data_dir)
+        # 檢查是否在雲端環境（Render 等）
+        is_cloud = os.environ.get("RENDER") or os.environ.get("RAILWAY_ENVIRONMENT")
 
-        # 在背景執行緒中載入歷史資料（避免阻塞）
-        loop = asyncio.get_event_loop()
-        await loop.run_in_executor(None, data_collector.load_initial_historical_data)
-        print("✅ 資料收集系統已就緒")
+        if is_cloud:
+            print("☁️ 偵測到雲端環境，跳過資料收集系統初始化")
+            print("💡 資料收集應由獨立的排程任務執行")
+            data_collector = None
+        else:
+            print("📡 背景初始化資料收集系統...")
+            data_collector = OptimizedIntegratedDataCollectionSystem(base_dir=data_dir)
+            # 在背景執行緒中載入歷史資料（避免阻塞）
+            loop = asyncio.get_event_loop()
+            await loop.run_in_executor(None, data_collector.load_initial_historical_data)
+            print("✅ 資料收集系統已就緒")
 
-        # 初始化其他系統
-        integrated_system = IntegratedShockPredictionSystem()
-        detector = FinalOptimizedShockDetector()
-        predictor = RealtimeShockPredictor(data_dir=data_dir)
+        # 初始化其他系統（這些不需要外部資料連線）
+        try:
+            integrated_system = IntegratedShockPredictionSystem()
+            print("✅ 整合系統已就緒")
+        except Exception as e:
+            print(f"⚠️ 整合系統初始化失敗: {e}")
 
-        print("✅ 所有系統初始化完成!")
+        try:
+            detector = FinalOptimizedShockDetector()
+            print("✅ 衝擊波檢測器已就緒")
+        except Exception as e:
+            print(f"⚠️ 檢測器初始化失敗: {e}")
+
+        try:
+            predictor = RealtimeShockPredictor(data_dir=data_dir)
+            print("✅ 預測器已就緒")
+        except Exception as e:
+            print(f"⚠️ 預測器初始化失敗: {e}")
+
+        print("✅ 背景初始化完成!")
 
     except Exception as e:
         print(f"⚠️ 背景初始化警告: {e}")
