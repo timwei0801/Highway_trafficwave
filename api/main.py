@@ -5,6 +5,8 @@ from fastapi.responses import JSONResponse
 import uvicorn
 import sys
 import os
+import asyncio
+from contextlib import asynccontextmanager
 
 # 添加項目根目錄到 Python 路徑
 root_dir = os.path.dirname(os.path.dirname(__file__))
@@ -53,37 +55,47 @@ integrated_system = None
 detector = None
 predictor = None
 data_collector = None
+_init_task = None  # 背景初始化任務
 
-@app.on_event("startup")
-async def startup_event():
-    """應用啟動時初始化系統"""
+async def _background_init():
+    """背景初始化系統（不阻塞啟動）"""
     global integrated_system, detector, predictor, data_collector
 
-    print("正在初始化高速公路智慧交通預警決策支援系統...")
+    await asyncio.sleep(1)  # 讓伺服器先啟動
 
     try:
-        # 設定資料目錄
         data_dir = os.path.join(root_dir, "data")
 
-        # 初始化資料收集系統（最優先）
-        print("📡 正在初始化資料收集系統...")
+        print("📡 背景初始化資料收集系統...")
         data_collector = OptimizedIntegratedDataCollectionSystem(base_dir=data_dir)
-        data_collector.load_initial_historical_data()
+
+        # 在背景執行緒中載入歷史資料（避免阻塞）
+        loop = asyncio.get_event_loop()
+        await loop.run_in_executor(None, data_collector.load_initial_historical_data)
         print("✅ 資料收集系統已就緒")
 
-        # 初始化後端系統
+        # 初始化其他系統
         integrated_system = IntegratedShockPredictionSystem()
         detector = FinalOptimizedShockDetector()
         predictor = RealtimeShockPredictor(data_dir=data_dir)
 
-        print("✅ 系統初始化完成!")
-        print("🚀 智慧交通預警系統已啟動")
-        print("📊 衝擊波檢測系統已就緒")
-        print("🔮 AI預測引擎已載入")
+        print("✅ 所有系統初始化完成!")
 
     except Exception as e:
-        print(f"⚠️ 系統初始化警告: {e}")
+        print(f"⚠️ 背景初始化警告: {e}")
         print("🔄 使用模擬模式運行...")
+
+@app.on_event("startup")
+async def startup_event():
+    """應用啟動時初始化系統"""
+    global _init_task
+
+    print("🚀 高速公路智慧交通預警決策支援系統啟動中...")
+    print("✅ API 伺服器已就緒")
+    print("📡 系統初始化將在背景執行...")
+
+    # 啟動背景初始化（不阻塞）
+    _init_task = asyncio.create_task(_background_init())
 
 # 註冊所有路由
 app.include_router(traffic.router, prefix="/api/traffic", tags=["交通資料"])
