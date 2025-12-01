@@ -16,7 +16,9 @@
       "Bash(pip show:*)",
       "Bash(git commit:*)",
       "Bash(rm:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(git push:*)",
+      "Bash(cp:*)"
     ],
     "deny": [],
     "ask": []
