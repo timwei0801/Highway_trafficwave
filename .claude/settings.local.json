@@ -18,7 +18,9 @@
       "Bash(rm:*)",
       "Bash(npm run build:*)",
       "Bash(git push:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(ffprobe:*)",
+      "Bash(ffmpeg:*)"
     ],
     "deny": [],
     "ask": []

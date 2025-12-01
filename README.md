@@ -9,6 +9,7 @@
 </p>
 
 <p align="center">
+  <a href="https://highway-trafficwave-p3mo2f2qh-tim-weis-projects-a5ce8b80.vercel.app"><img src="https://img.shields.io/badge/Live_Demo-Vercel-black?logo=vercel" alt="Live Demo"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/Python-3.11+-blue.svg" alt="Python"></a>
   <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.104.1-green.svg" alt="FastAPI"></a>
