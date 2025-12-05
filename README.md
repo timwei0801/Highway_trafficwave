@@ -17,6 +17,8 @@
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.9.2-blue.svg" alt="TypeScript"></a>
   <a href="https://tensorflow.org/"><img src="https://img.shields.io/badge/TensorFlow-2.15.0-orange.svg" alt="TensorFlow"></a>
   <a href="https://doi.org/10.1109/TITS.2024.3411638"><img src="https://img.shields.io/badge/DOI-10.1109%2FTITS.2024.3411638-blue" alt="DOI"></a>
+  <img src="https://img.shields.io/badge/🏆_Award-2nd_Place-gold" alt="Award">
+  <img src="https://img.shields.io/badge/🎤_Speaker-2025_CIT_Conference-blue" alt="Conference">
 </p>
 
 <p align="center">
@@ -54,6 +56,42 @@ This research discovers that **traffic congestion propagation shares striking si
 
 <img src="docs/images/system-overview.png" alt="System Overview" width="100%">
 
+</td>
+</tr>
+</table>
+
+---
+
+## 🏆 Awards & Recognition
+
+| Achievement | Event | Date |
+|-------------|-------|------|
+| 🥈 **2nd Place** (1st Place Vacant) | National Expressway Intelligent Traffic Competition | Oct 2024 |
+| 🎤 **Invited Speaker** | 2025 Chinese Institute of Transportation Annual Conference | Dec 2025 |
+
+> This project was presented at the 2025 Annual Meeting of the Chinese Institute of Transportation, sharing our innovative approach of combining deep learning with physics-based shockwave theory for highway traffic prediction.
+
+### Competition Showcase
+
+<table>
+<tr>
+<td width="33%">
+<p align="center">
+  <img src="docs/images/官方海報照片.jpg" alt="Competition Poster" width="100%">
+</p>
+<p align="center"><sub>Official Competition Poster</sub></p>
+</td>
+<td width="33%">
+<p align="center">
+  <img src="docs/images/看板拍攝圖片.jpeg" alt="Conference Banner" width="100%">
+</p>
+<p align="center"><sub>2025 CIT Annual Conference</sub></p>
+</td>
+<td width="33%">
+<p align="center">
+  <img src="docs/images/個人報告圖片.jpg" alt="Presentation" width="100%">
+</p>
+<p align="center"><sub>Conference Presentation</sub></p>
 </td>
 </tr>
 </table>
