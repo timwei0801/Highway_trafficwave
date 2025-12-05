@@ -17,6 +17,8 @@
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.9.2-blue.svg" alt="TypeScript"></a>
   <a href="https://tensorflow.org/"><img src="https://img.shields.io/badge/TensorFlow-2.15.0-orange.svg" alt="TensorFlow"></a>
   <a href="https://doi.org/10.1109/TITS.2024.3411638"><img src="https://img.shields.io/badge/DOI-10.1109%2FTITS.2024.3411638-blue" alt="DOI"></a>
+  <img src="https://img.shields.io/badge/🏆_獎項-亞軍-gold" alt="獎項">
+  <img src="https://img.shields.io/badge/🎤_演講-2025_運輸學會年會-blue" alt="研討會">
 </p>
 
 <p align="center">
@@ -54,6 +56,42 @@
 
 <img src="docs/images/system-overview.png" alt="系統概覽" width="100%">
 
+</td>
+</tr>
+</table>
+
+---
+
+## 🏆 獲獎與榮譽
+
+| 成就 | 活動 | 日期 |
+|------|------|------|
+| 🥈 **亞軍**（冠軍從缺） | 全國國道智慧交通管理創意競賽 | 2024 年 10 月 |
+| 🎤 **受邀演講者** | 2025 年中華民國運輸學會年會暨學術研討會 | 2025 年 12 月 |
+
+> 本專案於 2025 年中華民國運輸學會年會發表，分享結合深度學習與物理學衝擊波理論的創新方法，用於高速公路交通預測。
+
+### 競賽與研討會展示
+
+<table>
+<tr>
+<td width="33%">
+<p align="center">
+  <img src="docs/images/官方海報照片.jpg" alt="競賽海報" width="100%">
+</p>
+<p align="center"><sub>競賽官方海報</sub></p>
+</td>
+<td width="33%">
+<p align="center">
+  <img src="docs/images/看板拍攝圖片.jpeg" alt="研討會看板" width="100%">
+</p>
+<p align="center"><sub>2025 運輸學會年會看板</sub></p>
+</td>
+<td width="33%">
+<p align="center">
+  <img src="docs/images/個人報告圖片.jpg" alt="會議報告" width="100%">
+</p>
+<p align="center"><sub>研討會現場報告</sub></p>
 </td>
 </tr>
 </table>
