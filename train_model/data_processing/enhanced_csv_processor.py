@@ -20,27 +20,27 @@ from train_model.data_processing.csv_processor import HighwayCSVProcessor
 
 class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
     """增強的國道CSV資料處理器 - 支援駕駛友善描述"""
-    
+
     def __init__(self, config_path: str = None):
         """初始化增強處理器"""
         super().__init__(config_path)
-        
+
         # 載入站點映射資料
         self.etag_data = self._load_etag_mapping()
         self.station_mapping = self._build_station_mapping()
-        
+
         # 載入休息站和交流道資訊
         self.rest_areas = self._load_rest_areas()
         self.interchange_info = self._load_interchange_info()
-        
+
         logger.info("增強CSV處理器初始化完成")
-    
+
     def _load_etag_mapping(self) -> pd.DataFrame:
         """載入 Etag 站點映射資料"""
         try:
             base_path = self.config_manager.resolve_path(self.data_config['input_data_path'])
             etag_file = os.path.join(base_path, '../Taiwan/Etag.csv')
-            
+
             if os.path.exists(etag_file):
                 etag_df = pd.read_csv(etag_file, encoding='utf-8')
                 logger.info(f"載入 Etag 映射資料: {len(etag_df)} 筆記錄")
@@ -48,33 +48,33 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
             else:
                 logger.warning(f"Etag 檔案不存在: {etag_file}")
                 return pd.DataFrame()
-                
+
         except Exception as e:
             logger.error(f"載入 Etag 映射資料失敗: {e}")
             return pd.DataFrame()
-    
+
     def _build_station_mapping(self) -> Dict[str, Dict[str, Any]]:
         """建立站點代號到友善名稱的映射（使用專案現有邏輯）"""
         station_mapping = {}
-        
+
         if self.etag_data.empty:
             return station_mapping
-        
+
         for _, row in self.etag_data.iterrows():
             try:
                 # 提取站點編號（去除版本號）- 使用與 propagation_system.py 相同邏輯
                 station_code = row['編號']
                 if pd.isna(station_code):
                     continue
-                    
+
                 # 將站點編號轉換為資料中的格式
                 # 例如：01F-034.0N -> 01F0340N
                 clean_code = station_code.replace('-', '').replace('.', '')
-                
+
                 # 建立映射（使用專案現有結構）
                 station_mapping[clean_code] = {
                     'id': row['ID'],
-                    'direction': row['方向'], 
+                    'direction': row['方向'],
                     'original_code': station_code,
                     'start_ic': row['交流道(起)'],
                     'end_ic': row['交流道(迄)'],
@@ -84,14 +84,14 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                     'latitude': row['緯度(北緯)'] if pd.notna(row['緯度(北緯)']) else None,
                     'longitude': row['經度(東經)'] if pd.notna(row['經度(東經)']) else None
                 }
-                
+
             except Exception as e:
                 logger.warning(f"處理站點映射失敗 {row.get('編號', 'Unknown')}: {e}")
                 continue
-        
+
         logger.info(f"建立站點映射: {len(station_mapping)} 個站點")
         return station_mapping
-    
+
     def _extract_mileage(self, station_code: str) -> float:
         """從站點編號中提取里程數"""
         try:
@@ -103,7 +103,7 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
             return 0.0
         except:
             return 0.0
-    
+
     def _load_rest_areas(self) -> Dict[str, List[Dict[str, Any]]]:
         """載入休息站資訊"""
         # 國道休息站資訊（可以從外部檔案載入）
@@ -121,10 +121,10 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                 {'name': '古坑服務區', 'mileage': 254.5, 'direction': 'both', 'facilities': ['加油站', '餐廳', '便利店', '停車場']},
             ]
         }
-        
+
         logger.info(f"載入休息站資訊: 國道1號 {len(rest_areas['01F'])} 個，國道3號 {len(rest_areas['03F'])} 個")
         return rest_areas
-    
+
     def _load_interchange_info(self) -> Dict[str, Dict[str, Any]]:
         """載入交流道替代路線資訊"""
         # 主要交流道的替代路線資訊
@@ -150,7 +150,7 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                 'description': '可使用台66線東西向快速道路或台1線',
                 'peak_hours': ['07:30-09:30', '17:30-19:30']
             },
-            
+
             # 中部地區
             '台中': {
                 'alternatives': ['台74線', '台1線', '台3線'],
@@ -162,7 +162,7 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                 'description': '可經由台1線或台19線繞行彰化市區',
                 'peak_hours': ['07:30-09:30', '17:30-19:30']
             },
-            
+
             # 南部地區
             '台南': {
                 'alternatives': ['台86線', '台1線', '台17線'],
@@ -175,107 +175,107 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                 'peak_hours': ['07:30-09:30', '17:30-19:30']
             }
         }
-        
+
         logger.info(f"載入交流道替代路線資訊: {len(interchange_info)} 個交流道")
         return interchange_info
-    
+
     def resolve_station_code(self, station_code: str) -> str:
         """解析站點代號為友善名稱（使用專案現有邏輯）"""
-        
+
         # 首先嘗試從 CSV 格式解析：N0010_SB,034K+000
         if ',' in station_code and 'K+' in station_code:
             try:
                 parts = station_code.split(',')
                 direction_code = parts[0].strip()
                 mileage_code = parts[1].strip()
-                
+
                 # 解析國道和方向
                 if 'N0010' in direction_code:
                     highway = '國道1號'
                     direction = '北向' if 'NB' in direction_code else '南向'
                     highway_code = '01F'
                 elif 'N0030' in direction_code:
-                    highway = '國道3號' 
+                    highway = '國道3號'
                     direction = '北向' if 'NB' in direction_code else '南向'
                     highway_code = '03F'
                 else:
                     return station_code  # 無法識別的格式
-                
+
                 # 解析里程
                 if 'K+' in mileage_code:
                     km_str = mileage_code.split('K+')[0]
                     km = float(km_str)
-                    
+
                     # 構建對應的 Etag 格式進行查找
                     # 例如：034K+000 -> 01F-034.0N
                     etag_format = f"{highway_code}-{km_str:0>3}.0{'N' if '北向' in direction else 'S'}"
                     clean_etag = etag_format.replace('-', '').replace('.', '')
-                    
+
                     # 嘗試從映射中查找
                     if clean_etag in self.station_mapping:
                         mapping = self.station_mapping[clean_etag]
                         return mapping['friendly_name']
-                    
+
                     # 如果沒找到映射，返回基本描述
                     return f"{highway}{direction} {km}公里處"
-                    
+
             except Exception as e:
                 logger.warning(f"解析CSV格式代號失敗 {station_code}: {e}")
-        
+
         # 嘗試直接從 Etag 格式映射查找
         if station_code in self.station_mapping:
             return self.station_mapping[station_code]['friendly_name']
-        
+
         # 嘗試清理格式後查找
         clean_code = station_code.replace('-', '').replace('.', '').replace('_', '')
         if clean_code in self.station_mapping:
             return self.station_mapping[clean_code]['friendly_name']
-        
+
         return station_code  # 如果無法解析，返回原代號
-    
+
     def find_nearby_rest_areas(self, highway: str, mileage: float, direction: str = 'both') -> List[Dict[str, Any]]:
         """尋找附近的休息站"""
         if highway not in self.rest_areas:
             return []
-        
+
         nearby_areas = []
         for area in self.rest_areas[highway]:
             distance = abs(area['mileage'] - mileage)
-            
+
             # 只考慮50公里內的休息站
             if distance <= 50:
                 area_info = area.copy()
                 area_info['distance_km'] = distance
                 area_info['is_ahead'] = area['mileage'] > mileage
                 nearby_areas.append(area_info)
-        
+
         # 按距離排序
         nearby_areas.sort(key=lambda x: x['distance_km'])
         return nearby_areas
-    
+
     def get_alternative_routes(self, start_ic: str, end_ic: str) -> List[str]:
         """獲取替代路線建議"""
         alternatives = []
-        
+
         # 檢查起點交流道的替代路線
         for ic_name, info in self.interchange_info.items():
             if ic_name in start_ic or ic_name in end_ic:
                 alternatives.extend(info['alternatives'])
-        
+
         # 去重並返回
         return list(set(alternatives))
-    
+
     def generate_enhanced_text_descriptions(self, df: pd.DataFrame) -> List[str]:
         """生成增強的文字描述 - 包含友善名稱和駕駛建議"""
         descriptions = []
-        
+
         for idx, row in df.iterrows():
             try:
                 # 解析基本資訊
                 direction_code = str(row['國道編號方向'])
                 mileage_str = str(row['樁號'])
                 mileage_num = float(row['里程']) / 1000  # 轉換為公里
-                
+
                 # 解析國道和方向
                 if 'N0010' in direction_code:
                     highway = '國道1號'
@@ -289,7 +289,7 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                     highway = '國道'
                     highway_code = '01F'
                     direction = ''
-                
+
                 # 基本路段描述
                 desc = f"""=== {highway}{direction} {mileage_num:.1f}公里處路段資訊 ===
 
@@ -311,20 +311,20 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                     lane_width = row.get(f'車道{i}寬', 0)
                     if pd.notna(lane_width) and float(lane_width) > 0:
                         lane_info.append(f"第{i}車道 {lane_width}公尺")
-                
+
                 if lane_info:
                     desc += f"\n• 車道寬度：{' | '.join(lane_info)}"
-                
+
                 # 路肩資訊
                 shoulder_info = []
                 if row.get('內路肩') == '有' and pd.notna(row.get('內路肩寬')) and float(row.get('內路肩寬', 0)) > 0:
                     shoulder_info.append(f"內路肩 {row['內路肩寬']}公尺")
                 if row.get('外路肩') == '無' and pd.notna(row.get('外路肩寬')) and float(row.get('外路肩寬', 0)) > 0:
                     shoulder_info.append(f"外路肩 {row['外路肩寬']}公尺")
-                
+
                 if shoulder_info:
                     desc += f"\n• 路肩設施：{' | '.join(shoulder_info)}"
-                
+
                 # 輔助車道資訊
                 aux_lanes = []
                 for i in range(1, 4):
@@ -332,10 +332,10 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                     aux_width = row.get(f'輔助車道{i}寬', 0)
                     if pd.notna(aux_lane) and aux_lane != '無' and pd.notna(aux_width) and float(aux_width) > 0:
                         aux_lanes.append(f"輔助車道{i} {aux_width}公尺")
-                
+
                 if aux_lanes:
                     desc += f"\n• 輔助車道：{' | '.join(aux_lanes)}"
-                
+
                 # 幾何設計特性
                 desc += f"\n\n🔄 幾何設計："
                 if pd.notna(row.get('曲率半徑')) and float(row.get('曲率半徑', 0)) > 0:
@@ -347,7 +347,7 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                     else:
                         curve_desc = "緩彎路段"
                     desc += f"\n• 曲率半徑：{curvature}公尺 ({curve_desc})"
-                
+
                 if pd.notna(row.get('縱向坡度')):
                     slope = float(row['縱向坡度'])
                     if abs(slope) > 0.03:
@@ -355,10 +355,10 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                     else:
                         slope_desc = "平坦路段"
                     desc += f"\n• 縱向坡度：{slope:.3f} ({slope_desc})"
-                
+
                 if pd.notna(row.get('橫向坡度')):
                     desc += f"\n• 橫向坡度：{float(row['橫向坡度']):.3f}"
-                
+
                 # 尋找附近休息站
                 nearby_rest_areas = self.find_nearby_rest_areas(highway_code, mileage_num)
                 if nearby_rest_areas:
@@ -367,7 +367,7 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                         direction_desc = "前方" if area['is_ahead'] else "後方"
                         desc += f"\n• {area['name']}：{direction_desc}{area['distance_km']:.1f}公里"
                         desc += f" (設施：{', '.join(area['facilities'])})"
-                
+
                 # 特殊路段警示
                 warnings = []
                 if pd.notna(row.get('曲率半徑')) and float(row['曲率半徑']) < 500:
@@ -376,90 +376,115 @@ class EnhancedHighwayCSVProcessor(HighwayCSVProcessor):
                     warnings.append("注意坡度變化，保持安全車距")
                 if row.get('避車彎') != '無':
                     warnings.append("路段設有避車彎，注意安全")
-                
+
                 if warnings:
                     desc += f"\n\n⚠️ 駕駛提醒：\n• " + "\n• ".join(warnings)
-                
+
                 # 駕駛建議
                 desc += f"\n\n💡 駕駛建議："
                 desc += f"\n• 建議車速：依路況調整，注意速限標示"
                 desc += f"\n• 車道選擇：建議使用中間車道行駛"
                 if aux_lanes:
                     desc += f"\n• 匯入匯出：注意輔助車道車輛動態"
-                
+
                 descriptions.append(desc.strip())
-                
+
             except Exception as e:
                 logger.warning(f"生成路段 {idx} 的增強描述失敗: {e}")
                 # 使用基本描述作為備用
                 basic_desc = f"路段資訊：{row.get('國道編號方向', '')} {row.get('樁號', '')} - 基本道路資料"
                 descriptions.append(basic_desc)
-        
+
         logger.info(f"生成增強文字描述: {len(descriptions)} 個")
         return descriptions
-    
+
     def process_all_data_enhanced(self) -> List[Dict[str, Any]]:
-        """處理所有資料並生成增強的訓練格式"""
+        """處理所有資料並生成增強的訓練格式
+
+        重要修改：不再分割文本！
+        每個 CSV 行對應一個完整的文檔，確保所有相關資訊在同一個向量中。
+        這樣檢索時可以找到完整的路段資訊。
+        """
         # 載入資料
         highway1_df, highway3_df = self.load_highway_data()
-        
+
         # 清理資料
         highway1_clean = self.clean_and_normalize_data(highway1_df)
         highway3_clean = self.clean_and_normalize_data(highway3_df)
-        
-        # 生成增強的文字描述
+
+        # 生成增強的文字描述（每個 CSV 行一個完整描述）
         highway1_texts = self.generate_enhanced_text_descriptions(highway1_clean)
         highway3_texts = self.generate_enhanced_text_descriptions(highway3_clean)
-        
-        # 合併所有文本
-        all_texts = highway1_texts + highway3_texts
-        
-        # 分割文本並添加元數據
+
+        # 處理資料 - 不再分割！每個路段保持為一個完整文檔
         processed_data = []
-        for i, text in enumerate(all_texts):
-            chunks = self.chunk_text(text)
-            
-            # 確定來源和基本資訊
-            source = 'highway1' if i < len(highway1_texts) else 'highway3'
-            
-            # 從原始資料獲取位置資訊
-            if source == 'highway1':
-                row = highway1_clean.iloc[i]
-            else:
-                row = highway3_clean.iloc[i - len(highway1_texts)]
-            
-            # 解析位置資訊
+
+        # 處理國道一號
+        for i, text in enumerate(highway1_texts):
+            row = highway1_clean.iloc[i]
             direction_code = str(row['國道編號方向'])
             mileage_num = float(row['里程']) / 1000
-            
-            for j, chunk in enumerate(chunks):
-                processed_data.append({
-                    'id': f'{source}_{i}_{j}',
-                    'text': chunk,
-                    'source': source,
-                    'chunk_index': j,
-                    'original_index': i,
-                    'highway': '國道1號' if 'N0010' in direction_code else '國道3號',
-                    'direction': '北向' if 'NB' in direction_code else '南向',
-                    'mileage': mileage_num,
-                    'station_code': f"{row['國道編號方向']},{row['樁號']}",
-                    'friendly_location': self.resolve_station_code(f"{row['國道編號方向']},{row['樁號']}"),
-                    'coordinates': {
-                        'lat': float(row['經緯度坐標Lat']) if pd.notna(row['經緯度坐標Lat']) else None,
-                        'lng': float(row['經緯度坐標Lon']) if pd.notna(row['經緯度坐標Lon']) else None
-                    }
-                })
-        
-        logger.info(f"增強處理完成，總共生成 {len(processed_data)} 個文本塊")
-        
+
+            processed_data.append({
+                'id': f'highway1_{i}',
+                'text': text,  # 保持完整文本，不分割
+                'source': 'highway1',
+                'chunk_index': 0,
+                'original_index': i,
+                'highway': '國道1號',
+                'direction': '北向' if 'NB' in direction_code else '南向',
+                'mileage': mileage_num,
+                'mileage_marker': str(row['樁號']),
+                'station_code': f"{row['國道編號方向']},{row['樁號']}",
+                'friendly_location': self.resolve_station_code(f"{row['國道編號方向']},{row['樁號']}"),
+                'coordinates': {
+                    'lat': float(row['經緯度坐標Lat']) if pd.notna(row['經緯度坐標Lat']) else None,
+                    'lng': float(row['經緯度坐標Lon']) if pd.notna(row['經緯度坐標Lon']) else None
+                }
+            })
+
+        # 處理國道三號
+        for i, text in enumerate(highway3_texts):
+            row = highway3_clean.iloc[i]
+            direction_code = str(row['國道編號方向'])
+            mileage_num = float(row['里程']) / 1000
+
+            processed_data.append({
+                'id': f'highway3_{i}',
+                'text': text,  # 保持完整文本，不分割
+                'source': 'highway3',
+                'chunk_index': 0,
+                'original_index': i,
+                'highway': '國道3號',
+                'direction': '北向' if 'NB' in direction_code else '南向',
+                'mileage': mileage_num,
+                'mileage_marker': str(row['樁號']),
+                'station_code': f"{row['國道編號方向']},{row['樁號']}",
+                'friendly_location': self.resolve_station_code(f"{row['國道編號方向']},{row['樁號']}"),
+                'coordinates': {
+                    'lat': float(row['經緯度坐標Lat']) if pd.notna(row['經緯度坐標Lat']) else None,
+                    'lng': float(row['經緯度坐標Lon']) if pd.notna(row['經緯度坐標Lon']) else None
+                }
+            })
+
+        logger.info(f"增強處理完成，總共生成 {len(processed_data)} 個完整路段文檔")
+
         # 統計增強資料
         highway_stats = {}
         for item in processed_data:
             highway = item['highway']
             highway_stats[highway] = highway_stats.get(highway, 0) + 1
-        
+
         logger.info(f"增強資料分布: {highway_stats}")
-        
+
+        # 顯示文本長度統計
+        text_lengths = [len(item['text']) for item in processed_data]
+        if text_lengths:
+            avg_len = sum(text_lengths) / len(text_lengths)
+            min_len = min(text_lengths)
+            max_len = max(text_lengths)
+            logger.info(f"文本長度統計 - 平均: {avg_len:.0f}, 最小: {min_len}, 最大: {max_len} 字符")
+
         return processed_data
 
 def main():
@@ -467,23 +492,23 @@ def main():
     try:
         processor = EnhancedHighwayCSVProcessor()
         processed_data = processor.process_all_data_enhanced()
-        
+
         # 儲存增強資料
         output_file = "enhanced_highway_data.json"
         output_path = processor.save_processed_data(processed_data, output_file)
-        
+
         print(f"增強處理完成！生成了 {len(processed_data)} 個文本塊")
         print(f"輸出檔案：{output_path}")
-        
+
         # 顯示範例
         print("\n=== 範例增強描述 ===")
         for i in range(min(2, len(processed_data))):
             print(f"\n--- 塊 {i+1} ---")
             print(f"位置：{processed_data[i]['friendly_location']}")
             print(f"文本預覽：{processed_data[i]['text'][:300]}...")
-            
+
         return processed_data
-        
+
     except Exception as e:
         logger.error(f"增強處理失敗: {e}")
         return None
