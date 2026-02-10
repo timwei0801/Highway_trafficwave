@@ -1,8 +1,7 @@
 # -- coding: utf-8 --
 import pickle as pkl
 import scipy.sparse as sp
-from scipy.sparse.linalg.eigen import eigsh
-# from scipy.sparse.linalg.eigen.arpack import eigsh
+from scipy.sparse.linalg import eigsh
 import sys
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error

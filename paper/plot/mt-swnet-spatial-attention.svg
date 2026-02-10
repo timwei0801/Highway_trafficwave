@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="Times New Roman, serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4a90d9"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Spatial Attention with Physical Information</text>
+
+  <!-- Main Flow Container -->
+  <rect x="20" y="45" width="860" height="260" rx="0" fill="none" stroke="#c6e610" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- ==================== INPUT SECTION ==================== -->
+  <!-- Input X + STE -->
+  <rect x="40" y="80" width="80" height="50" rx="3" fill="#e8e892" stroke="#666" stroke-width="1"/>
+  <text x="80" y="102" text-anchor="middle" font-size="11" fill="#333">X + STE</text>
+  <text x="80" y="118" text-anchor="middle" font-size="9" fill="#666">(Input Features)</text>
+
+  <!-- Plus symbol -->
+  <text x="140" y="113" text-anchor="middle" font-size="20" fill="#333">+</text>
+
+  <!-- Degree Embedding -->
+  <rect x="155" y="80" width="70" height="50" rx="3" fill="#b1aeae" stroke="#666" stroke-width="1"/>
+  <text x="190" y="102" text-anchor="middle" font-size="10" fill="#333">In° + Out°</text>
+  <text x="190" y="118" text-anchor="middle" font-size="9" fill="#666">(Degree Emb)</text>
+
+  <!-- Arrow to FC layers -->
+  <line x1="225" y1="105" x2="250" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ==================== FC PROJECTION ==================== -->
+  <!-- FC(Q) -->
+  <rect x="260" y="60" width="50" height="25" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="285" y="77" text-anchor="middle" font-size="10" fill="#333">FC(Q)</text>
+
+  <!-- FC(K) -->
+  <rect x="260" y="93" width="50" height="25" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="285" y="110" text-anchor="middle" font-size="10" fill="#333">FC(K)</text>
+
+  <!-- FC(V) -->
+  <rect x="260" y="126" width="50" height="25" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="285" y="143" text-anchor="middle" font-size="10" fill="#333">FC(V)</text>
+
+  <!-- Arrows from FC to MatMul -->
+  <line x1="310" y1="72" x2="345" y2="95" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="310" y1="105" x2="345" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ==================== ATTENTION COMPUTATION ==================== -->
+  <!-- MatMul (Q·K^T) -->
+  <rect x="355" y="85" width="60" height="35" rx="3" fill="#f99fd9" stroke="#ee78c3" stroke-width="1"/>
+  <text x="385" y="100" text-anchor="middle" font-size="10" fill="#333">MatMul</text>
+  <text x="385" y="112" text-anchor="middle" font-size="9" fill="#666">Q·K<tspan baseline-shift="super" font-size="7">T</tspan></text>
+
+  <!-- Arrow to Scale -->
+  <line x1="415" y1="105" x2="435" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Scale -->
+  <rect x="445" y="85" width="55" height="35" rx="3" fill="#d7bde2" stroke="#8e44ad" stroke-width="1"/>
+  <text x="472" y="100" text-anchor="middle" font-size="10" fill="#333">Scale</text>
+  <text x="472" y="112" text-anchor="middle" font-size="9" fill="#666">÷√d<tspan baseline-shift="sub" font-size="7">k</tspan></text>
+
+  <!-- Arrow to Plus -->
+  <line x1="500" y1="105" x2="520" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Plus symbol for physical info -->
+  <text x="535" y="113" text-anchor="middle" font-size="20" fill="#333">+</text>
+
+  <!-- ==================== PHYSICAL INFORMATION BOX ==================== -->
+  <rect x="520" y="170" width="130" height="120" rx="0" fill="none" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="585" y="187" text-anchor="middle" font-size="10" font-weight="bold" fill="#4a90d9">Physical Info</text>
+
+  <!-- Distance Matrix -->
+  <rect x="535" y="195" width="100" height="25" rx="2" fill="#262626" stroke="#333" stroke-width="1"/>
+  <text x="585" y="212" text-anchor="middle" font-size="9" fill="#fff">D<tspan baseline-shift="sub" font-size="7">dist</tspan></text>
+
+  <!-- Shortest Path -->
+  <rect x="535" y="230" width="100" height="25" rx="2" fill="#666" stroke="#333" stroke-width="1"/>
+  <text x="585" y="247" text-anchor="middle" font-size="9" fill="#fff">SP · W<tspan baseline-shift="sub" font-size="7">n</tspan></text>
+
+  <!-- Combined label -->
+  <text x="585" y="275" text-anchor="middle" font-size="9" fill="#666">(Learnable Weights)</text>
+
+  <!-- Arrow from Physical Info to Plus -->
+  <line x1="585" y1="170" x2="585" y2="130" stroke="#4a90d9" stroke-width="1"/>
+  <path d="M 585 130 L 585 115 Q 585 105, 575 105 L 555 105" fill="none" stroke="#4a90d9" stroke-width="1" marker-end="url(#arrow-blue)"/>
+
+  <!-- Arrow to Softmax -->
+  <line x1="555" y1="105" x2="605" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Softmax -->
+  <rect x="615" y="85" width="60" height="35" rx="3" fill="#f1948a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="645" y="107" text-anchor="middle" font-size="10" fill="#333">Softmax</text>
+
+  <!-- Arrow to MatMul V -->
+  <line x1="675" y1="105" x2="695" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- MatMul with V -->
+  <rect x="705" y="85" width="60" height="35" rx="3" fill="#f99fd9" stroke="#ee78c3" stroke-width="1"/>
+  <text x="735" y="100" text-anchor="middle" font-size="10" fill="#333">MatMul</text>
+  <text x="735" y="112" text-anchor="middle" font-size="9" fill="#666">Att·V</text>
+
+  <!-- V arrow -->
+  <path d="M 310 138 L 330 138 Q 340 138, 340 148 L 340 160 Q 340 170, 350 170 L 720 170 Q 730 170, 730 160 L 730 125" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrow to Output -->
+  <line x1="765" y1="105" x2="800" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ==================== OUTPUT ==================== -->
+  <rect x="810" y="80" width="60" height="50" rx="3" fill="#d5f5e3" stroke="#27ae60" stroke-width="1"/>
+  <text x="840" y="100" text-anchor="middle" font-size="11" fill="#333">Output</text>
+  <text x="840" y="116" text-anchor="middle" font-size="9" fill="#666">(N×d)</text>
+
+  <!-- ==================== FORMULA ==================== -->
+  <text x="450" y="310" text-anchor="middle" font-size="11" font-style="italic" fill="#333">
+    Attention(Q,K,V) = Softmax(QK<tspan baseline-shift="super" font-size="8">T</tspan>/√d<tspan baseline-shift="sub" font-size="8">k</tspan> + D<tspan baseline-shift="sub" font-size="8">dist</tspan> + SP·W<tspan baseline-shift="sub" font-size="8">n</tspan>) · V
+  </text>
+
+</svg>

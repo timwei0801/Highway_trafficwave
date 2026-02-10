@@ -99,7 +99,20 @@ Reference/paper/*.pdf
 *.claude/
 
 國道智慧交通競賽.pdf
+國道競賽報告.docx
+國道競賽報告.pdf
 實際操作.gif
 docs/images/demo_original.gif
 frontend/node_modules.nosync/
 node_modules.nosync/
+frontend/node_modules*
+
+# PyTorch model checkpoints and training artifacts
+src/models/mt_swnet_pytorch/checkpoints/
+*.pt
+
+# Paper PDF files
+paper/*.pdf
+
+# Training history
+training_history.json

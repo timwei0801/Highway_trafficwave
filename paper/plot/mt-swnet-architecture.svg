@@ -1,0 +1,519 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 800" font-family="Times New Roman, serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4a90d9"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#e74c3c"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#27ae60"/>
+    </marker>
+  </defs>
+
+  <!-- Main content wrapper - shifted down 50px -->
+  <g transform="translate(0, 50)">
+
+  <!-- ==================== MULTI-SOURCE INPUT SECTION (TOP) ==================== -->
+  <g transform="translate(300, 5)">
+    <!-- Row labels -->
+    <text x="0" y="14" text-anchor="end" font-size="9" fill="#333">Traffic Flow</text>
+    <text x="0" y="36" text-anchor="end" font-size="9" fill="#333">Timestamp</text>
+    <text x="0" y="66" text-anchor="end" font-size="9" fill="#333">Station</text>
+    <text x="0" y="96" text-anchor="end" font-size="9" fill="#333">Historical</text>
+
+    <!-- Traffic Flow row -->
+    <g transform="translate(8, 4)">
+      <rect x="0" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Timestamp row -->
+    <g transform="translate(8, 24)">
+      <rect x="0" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Station row -->
+    <g transform="translate(8, 44)">
+      <rect x="0" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+        <!-- Historical row -->
+    <g transform="translate(8, 64)">
+      <rect x="0" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Historical row -->
+    <g transform="translate(8, 84)">
+      <rect x="0" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Physical Info Legend -->
+    <g transform="translate(150, 4)">
+      <rect x="100" y="9" width="8" height="18" fill="#b1aeae" stroke="#b1aeae" stroke-width="0.5"/>
+      <text x="112" y="20" font-size="8" fill="#333">Degree</text>
+      <rect x="100" y="27" width="8" height="18" fill="#666" stroke="#666" stroke-width="0.5"/>
+      <text x="112" y="38" font-size="8" fill="#333">Edge</text>
+      <rect x="100" y="45" width="8" height="18" fill="#262626" stroke="#262626" stroke-width="0.5"/>
+      <text x="112" y="55" font-size="8" fill="#333">Distance</text>
+    </g>
+
+    <!-- Label below matrix -->
+    <text x="150" y="-10" text-anchor="middle" font-size="15" font-style="italic" fill="#333">X<tspan baseline-shift="sub" font-size="10">feed_en</tspan></text>
+  </g>
+
+  <!-- Arrow from Input to Encoder -->
+  <line x1="372" y1="110" x2="372" y2="165" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ==================== ENCODER SECTION ==================== -->
+  <text x="448" y="130" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Encoder</text>
+
+  <!-- ========== ST-Physical Block 1 ========== -->
+  <rect x="312" y="140" width="270" height="215" rx="0" fill="none" stroke="#c6e610" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="450" y="157" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">ST-Physical Block</text>
+  <!-- Physical Info indicators - aligned with Spatial Attention (y=257-305) -->
+  <rect x="280" y="262" width="8" height="18" fill="#b1aeae" stroke="#b1aeae" stroke-width="0.5"/>
+  <rect x="280" y="280" width="8" height="18" fill="#666" stroke="#666" stroke-width="0.5"/>
+  <rect x="280" y="298" width="8" height="18" fill="#262626" stroke="#262626" stroke-width="0.5"/>
+  <line x1="290" y1="289" x2="323" y2="289" stroke="#4495f0" stroke-width="1" marker-end="url(#arrow-blue)"/>
+
+  <!-- Temporal Attention (top - receives input) -->
+  <rect x="325" y="167" width="95" height="22" rx="3" fill="#f99fd9" stroke="#ee78c3" stroke-width="1"/>
+  <text x="372" y="182" text-anchor="middle" font-size="10" fill="#333">Temporal Attention</text>
+
+  <!-- Feed&BN -->
+  <rect x="345" y="214" width="55" height="18" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="372" y="226" text-anchor="middle" font-size="10" fill="#333">Feed&amp;BN</text>
+
+  <!-- Spatial Attention & Physical Info -->
+  <rect x="325" y="257" width="95" height="48" rx="3" fill="#f1948a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="372" y="273" text-anchor="middle" font-size="10" fill="#333">Spatial Attention</text>
+  <text x="372" y="284" text-anchor="middle" font-size="10" fill="#333">&amp; Physical</text>
+  <text x="372" y="295" text-anchor="middle" font-size="10" fill="#333">Information</text>
+
+  <!-- Fusion Gate -->
+  <rect x="470" y="265" width="85" height="30" rx="3" fill="#f9e79f" stroke="#f1c40f" stroke-width="1"/>
+  <text x="512" y="283" text-anchor="middle" font-size="10" fill="#333">Fusion Gate</text>
+
+  <!-- GCN sub-block -->
+  <rect x="460" y="167" width="110" height="75" rx="3" fill="rgba(51,51,51,0.107)" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="470" y="180" width="90" height="20" rx="2" fill="#d7bde2" stroke="#8e44ad" stroke-width="1"/>
+  <line x1="515" y1="202" x2="515" y2="218" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="514" y="193" text-anchor="middle" font-size="10" fill="#333">Multi-head GCN</text>
+  <rect x="489" y="220" width="55" height="18" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="517" y="232" text-anchor="middle" font-size="10" fill="#333">Feed&amp;BN</text>
+  <line x1="515" y1="245" x2="515" y2="263" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrows inside Block 1 (top to bottom flow) -->
+  <line x1="372" y1="190" x2="372" y2="212" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="372" y1="235" x2="372" y2="255" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="420" y1="280" x2="468" y2="280" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M 400 223 L 425 223 Q 435 223, 435 213 L 435 200 Q 435 190, 445 190 L 458 190" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+
+  <!-- Plus circle -->
+  <text x="515" y="346" text-anchor="middle" font-size="45" fill="#333">⊕</text>
+
+  <!-- L1 label -->
+  <text x="586" y="160" font-size="13" fill="#333">L<tspan baseline-shift="sub" font-size="8">1</tspan></text>
+
+  <!-- ========== ST-Physical Block 2 ========== -->
+  <rect x="312" y="375" width="270" height="215" rx="0" fill="none" stroke="#c6e610" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="450" y="392" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">ST-Physical Block</text>
+  <path d="M 515 345 L 515 360 Q 515 370, 505 370 L 382 370 Q 372 370, 372 380 L 372 400" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Temporal Attention -->
+  <rect x="325" y="402" width="95" height="22" rx="3" fill="#f99fd9" stroke="#ee78c3" stroke-width="1"/>
+  <text x="372" y="417" text-anchor="middle" font-size="10" fill="#333">Temporal Attention</text>
+
+  <!-- Feed&BN -->
+  <rect x="345" y="449" width="55" height="18" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="372" y="461" text-anchor="middle" font-size="10" fill="#333">Feed&amp;BN</text>
+
+  <!-- Spatial Attention & Physical Info -->
+  <rect x="325" y="492" width="95" height="48" rx="3" fill="#f1948a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="372" y="508" text-anchor="middle" font-size="10" fill="#333">Spatial Attention</text>
+  <text x="372" y="519" text-anchor="middle" font-size="10" fill="#333">&amp; Physical</text>
+  <text x="372" y="530" text-anchor="middle" font-size="10" fill="#333">Information</text>
+  <!-- Physical Info indicators - aligned with Spatial Attention (y=492-540) -->
+  <rect x="280" y="497" width="8" height="18" fill="#b1aeae" stroke="#b1aeae" stroke-width="0.5"/>
+  <rect x="280" y="515" width="8" height="18" fill="#666" stroke="#666" stroke-width="0.5"/>
+  <rect x="280" y="533" width="8" height="18" fill="#262626" stroke="#262626" stroke-width="0.5"/>
+  <line x1="290" y1="524" x2="323" y2="524" stroke="#4495f0" stroke-width="1" marker-end="url(#arrow-blue)"/>
+
+  <!-- Fusion Gate -->
+  <rect x="470" y="500" width="85" height="30" rx="3" fill="#f9e79f" stroke="#f1c40f" stroke-width="1"/>
+  <text x="512" y="518" text-anchor="middle" font-size="10" fill="#333">Fusion Gate</text>
+
+  <!-- GCN sub-block -->
+  <rect x="460" y="402" width="110" height="75" rx="3" fill="rgba(51,51,51,0.107)" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="470" y="415" width="90" height="20" rx="2" fill="#d7bde2" stroke="#8e44ad" stroke-width="1"/>
+  <line x1="515" y1="437" x2="515" y2="453" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="514" y="428" text-anchor="middle" font-size="10" fill="#333">Multi-head GCN</text>
+  <rect x="489" y="455" width="55" height="18" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="517" y="467" text-anchor="middle" font-size="10" fill="#333">Feed&amp;BN</text>
+  <line x1="515" y1="480" x2="515" y2="498" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrows inside Block 2 (top to bottom flow) -->
+  <line x1="372" y1="425" x2="372" y2="447" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="372" y1="470" x2="372" y2="490" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="420" y1="515" x2="468" y2="515" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M 400 458 L 425 458 Q 435 458, 435 448 L 435 435 Q 435 425, 445 425 L 458 425" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Plus circle -->
+  <path d="M 372 385 L 330 385 Q 320 385, 320 395 L 320 560 Q 320 570, 330 570 L 500 570" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="515" y="582" text-anchor="middle" font-size="45" fill="#333">⊕</text>
+
+  <!-- L2 label -->
+  <text x="586" y="395" font-size="13" fill="#333">L<tspan baseline-shift="sub" font-size="8">2</tspan></text>
+
+  <!-- Arrow from Block 1 Fusion Gate to Plus circle -->
+  <line x1="515" y1="298" x2="515" y2="320" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrow from Plus circle down to Block 2 Temporal Attention -->
+  <path d="M 372 148 L 330 148 Q 320 148, 320 158 L 320 325 Q 320 335, 330 335 L 500 335" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrow from Block 2 Fusion Gate to Plus circle -->
+  <line x1="515" y1="533" x2="515" y2="555" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ==================== DECODER SECTION (MOVED UP) ==================== -->
+  <!-- Decoder input (at top) -->
+  <g transform="translate(640, 5)">
+    <!-- Row labels -->
+    <text x="0" y="14" text-anchor="end" font-size="9" fill="#333">Traffic Flow</text>
+    <text x="0" y="36" text-anchor="end" font-size="9" fill="#333">Timestamp</text>
+    <text x="0" y="66" text-anchor="end" font-size="9" fill="#333">Station</text>
+    <text x="0" y="96" text-anchor="end" font-size="9" fill="#333">Historical</text>
+
+    <!-- Traffic Flow row (19 rectangles, first 10 filled, last 9 empty) -->
+    <g transform="translate(8, 4)">
+      <rect x="0" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#e8e892" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="none" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Timestamp row (19 rectangles) -->
+    <g transform="translate(8, 24)">
+      <rect x="0" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#aed6f1" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Station row (19 rectangles) -->
+    <g transform="translate(8, 44)">
+      <rect x="0" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#908695" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Historical row 1 (19 rectangles) -->
+    <g transform="translate(8, 64)">
+      <rect x="0" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#e8daef" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Historical row 2 (19 rectangles) -->
+    <g transform="translate(8, 84)">
+      <rect x="0" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="12" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="24" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="36" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="48" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="60" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="72" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="84" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="96" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="108" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="120" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="132" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="144" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="156" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="168" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="180" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="192" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="204" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+      <rect x="216" y="0" width="12" height="18" fill="#d5f5e3" stroke="#666" stroke-width="0.5"/>
+    </g>
+
+    <!-- Label below matrix -->
+    <text x="120" y="-10" text-anchor="middle" font-size="13" font-style="italic" fill="#333">X<tspan baseline-shift="sub" font-size="9">feed_de</tspan> = {X<tspan baseline-shift="sub" font-size="9">pre </tspan>, X<tspan baseline-shift="sub" font-size="9">0  </tspan>}</text>
+  </g>
+
+  <!-- Arrow from input to Decoder -->
+  <line x1="705" y1="110" x2="705" y2="168" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <text x="760" y="135" font-size="14" font-weight="bold" fill="#333">Decoder</text>
+
+  <!-- ========== Masked ST-Physical Block ========== -->
+  <rect x="645" y="145" width="270" height="215" rx="0" fill="none" stroke="#e6d110" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="783" y="162" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Masked ST-Physical Block</text>
+
+    <!-- Arrow from Plus circle down to Block 2 Temporal Attention -->
+  <path d="M 705 153 L 663 153 Q 653 153, 653 163 L 653 320 Q 653 330, 663 330 L 829 330" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Physical Info indicators - aligned with Spatial Attention (y=262-310) -->
+  <rect x="613" y="267" width="8" height="18" fill="#b1aeae" stroke="#b1aeae" stroke-width="0.5"/>
+  <rect x="613" y="285" width="8" height="18" fill="#666" stroke="#666" stroke-width="0.5"/>
+  <rect x="613" y="303" width="8" height="18" fill="#262626" stroke="#262626" stroke-width="0.5"/>
+  <line x1="623" y1="294" x2="656" y2="294" stroke="#4495f0" stroke-width="1" marker-end="url(#arrow-blue)"/>
+
+  <!-- Masked Temporal Attention (top - receives input) -->
+  <rect x="658" y="172" width="95" height="22" rx="3" fill="#f99fd9" stroke="#ee78c3" stroke-width="1"/>
+  <text x="705" y="187" text-anchor="middle" font-size="10" fill="#333">Masked Temporal Att.</text>
+
+  <!-- Feed&BN -->
+  <rect x="678" y="219" width="55" height="18" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="705" y="231" text-anchor="middle" font-size="10" fill="#333">Feed&amp;BN</text>
+
+  <!-- Spatial Attention & Physical Info -->
+  <rect x="658" y="262" width="95" height="48" rx="3" fill="#f1948a" stroke="#e74c3c" stroke-width="1"/>
+  <text x="705" y="278" text-anchor="middle" font-size="10" fill="#333">Spatial Attention</text>
+  <text x="705" y="289" text-anchor="middle" font-size="10" fill="#333">&amp; Physical</text>
+  <text x="705" y="300" text-anchor="middle" font-size="10" fill="#333">Information</text>
+
+  <!-- Fusion Gate -->
+  <rect x="803" y="270" width="85" height="30" rx="3" fill="#f9e79f" stroke="#f1c40f" stroke-width="1"/>
+  <text x="845" y="288" text-anchor="middle" font-size="10" fill="#333">Fusion Gate</text>
+
+  <!-- GCN sub-block -->
+  <rect x="793" y="172" width="110" height="75" rx="3" fill="rgba(51,51,51,0.107)" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="803" y="185" width="90" height="20" rx="2" fill="#d7bde2" stroke="#8e44ad" stroke-width="1"/>
+  <line x1="848" y1="207" x2="848" y2="223" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="847" y="198" text-anchor="middle" font-size="10" fill="#333">Multi-head GCN</text>
+  <rect x="822" y="225" width="55" height="18" rx="2" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="850" y="237" text-anchor="middle" font-size="10" fill="#333">Feed&amp;BN</text>
+  <line x1="848" y1="250" x2="848" y2="268" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Arrows inside Decoder Block (top to bottom flow) -->
+  <line x1="705" y1="195" x2="705" y2="217" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="705" y1="240" x2="705" y2="260" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="753" y1="285" x2="801" y2="285" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M 733 228 L 758 228 Q 768 228, 768 218 L 768 205 Q 768 195, 778 195 L 791 195" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Plus circle -->
+  <text x="848" y="340" text-anchor="middle" font-size="45" fill="#333">⊕</text>
+
+  <!-- L1 label -->
+  <text x="919" y="165" font-size="13" fill="#333">L<tspan baseline-shift="sub" font-size="8">1</tspan></text>
+
+  <!-- Arrow from Fusion Gate to Plus circle -->
+  <line x1="848" y1="303" x2="848" y2="315" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ==================== GENERATIVE INFERENCE (MOVED DOWN) ==================== -->
+  <rect x="645" y="380" width="270" height="60" rx="0" fill="none" stroke="#e6d113" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="650" y="395" font-size="12" font-weight="bold" fill="#333">Generative Inference</text>
+
+  <rect x="675" y="400" width="220" height="30" rx="3" fill="#fdebd0" stroke="#f39c12" stroke-width="1"/>
+  <text x="785" y="420" text-anchor="middle" font-size="10" fill="#333">Bridge Attention (×Q)</text>
+
+  <!-- Arrow from Holistic Attention to Feed Forward -->
+  <line x1="848" y1="445" x2="848" y2="478" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Feed Forward -->
+  <rect x="675" y="482" width="220" height="30" rx="3" fill="#aed6f1" stroke="#3498db" stroke-width="1"/>
+  <text x="785" y="502" text-anchor="middle" font-size="10" fill="#333">Feed Forward</text>
+
+  <!-- ==================== MULTI-TASK OUTPUT ==================== -->
+  <!-- Large curly brace (opening upward) from Feed Forward -->
+  <line x1="780" y1="515" x2="780" y2="548" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M 685 570
+           Q 685 560, 695 560
+           L 765 560
+           Q 780 560, 780 550
+           Q 780 560, 795 560
+           L 865 560
+           Q 875 560, 875 570"
+        fill="none" stroke="#27ae60" stroke-width="1.5"/>
+
+  <!-- R boxes (gray) -->
+  <rect x="695" y="578" width="40" height="25" rx="3" fill="#b0b0b0" stroke="#808080" stroke-width="1"/>
+  <text x="716" y="595" text-anchor="middle" font-size="11" fill="#333">R<tspan baseline-shift="sub" font-size="8">1</tspan></text>
+
+  <rect x="765" y="578" width="40" height="25" rx="3" fill="#b0b0b0" stroke="#808080" stroke-width="1"/>
+  <text x="786" y="595" text-anchor="middle" font-size="11" fill="#333">R<tspan baseline-shift="sub" font-size="8">2</tspan></text>
+
+  <rect x="835" y="578" width="40" height="25" rx="3" fill="#b0b0b0" stroke="#808080" stroke-width="1"/>
+  <text x="856" y="595" text-anchor="middle" font-size="11" fill="#333">R<tspan baseline-shift="sub" font-size="8">3</tspan></text>
+
+  <!-- Output labels Ŷ -->
+  <text x="696" y="622" text-anchor="middle" font-size="12" fill="#333">Ŷ<tspan baseline-shift="super" font-size="8">1</tspan></text>
+  <text x="766" y="622" text-anchor="middle" font-size="12" fill="#333">Ŷ<tspan baseline-shift="super" font-size="8">2</tspan></text>
+  <text x="836" y="622" text-anchor="middle" font-size="12" fill="#333">Ŷ<tspan baseline-shift="super" font-size="8">3</tspan></text>
+
+  <!-- Arrows from R boxes to Ŷ labels -->
+  <line x1="715" y1="605" x2="715" y2="628" stroke="#333" stroke-width="1" stroke-dasharray="2,1" marker-end="url(#arrow)"/>
+  <line x1="785" y1="605" x2="785" y2="628" stroke="#333" stroke-width="1" stroke-dasharray="2,1" marker-end="url(#arrow)"/>
+  <line x1="856" y1="605" x2="856" y2="628" stroke="#333" stroke-width="1" stroke-dasharray="2,1" marker-end="url(#arrow)"/>
+
+  <!-- Multi-task Layer at bottom -->
+  <rect x="675" y="632" width="220" height="28" rx="3" fill="#368ec9" stroke="#3498db" stroke-width="1"/>
+  <text x="785" y="651" text-anchor="middle" font-size="11" fill="#333">Multi-task Layer</text>
+
+  <!-- ==================== CONNECTING FLOWS ==================== -->
+  <!-- Encoder to Generative -->
+  <path d="M 585 460 L 790 460 L 790 480" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M 585 460 L 720 460 L 720 480" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Decoder to Generative -->
+  <line x1="848" y1="340" x2="848" y2="398" stroke="#333" stroke-width="1" marker-end="url(#arrow)"/>
+
+  </g><!-- End of main content wrapper -->
+
+</svg>
